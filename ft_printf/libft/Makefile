@@ -14,10 +14,10 @@ NAME = libft.a
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES) 
+	@ar rcs $(NAME) $(OFILES) 
 
 bonus: $(OBON) $(OFILES)
-	ar rcs	$(NAME)	 $(OFILES) $(OBON)
+	@ar rcs	$(NAME)	 $(OFILES) $(OBON)
 
 clean:
 	rm -f $(OFILES) $(OBON)

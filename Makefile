@@ -15,10 +15,10 @@ all: $(NAME)
 $(NAME): $(OFILES)
 	@make -C $(LIB)
 	@cp $(LIB)$(LIBA) .
-	$(CC) $(CFLAGS) $(OFILES) $(LIBA) $(MLX_LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OFILES) $(LIBA) $(MLX_LIB) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OFILES)

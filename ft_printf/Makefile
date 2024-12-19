@@ -12,7 +12,7 @@ $(NAME): $(OFILES)
 	@make -C $(LIB)
 	@cp $(LIB)$(LIBA) .
 	@mv $(LIBA) $(NAME)
-	ar rcs $(NAME) $(OFILES)
+	@ar rcs $(NAME) $(OFILES)
 clean: 
 	rm -f $(OFILES)
 	@make -C $(LIB) clean
