@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c
+SRCS = main.c move.c init.c
 LIB = ft_printf/
 LIBA = libftprintf.a
 LIB_PATH = $(LIB)libft/
