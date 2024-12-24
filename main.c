@@ -6,20 +6,23 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:20:16 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 16:02:05 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/24 16:04:30 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
 int	file(char *file)
 {
 	int	len;
 
 	len = ft_strlen(file);
-	if (file[len - 1] == 'r' && file[len - 2] == 'e' && file[len - 3] == 'b' && file[len - 4] == '.')
+	if (file[len - 1] == 'r' && file[len - 2] == 'e'
+		&& file[len - 3] == 'b' && file[len - 4] == '.')
 		return (1);
 	return (0);
 }
+
 int	check_walls(char *line)
 {
 	int	i;
