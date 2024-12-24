@@ -6,20 +6,59 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:20:16 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 10:44:48 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/24 16:02:05 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	close_window(t_game *game)
+int	file(char *file)
 {
-	free_map(game->map);
-	free_img(game);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	exit(0);
+	int	len;
+
+	len = ft_strlen(file);
+	if (file[len - 1] == 'r' && file[len - 2] == 'e' && file[len - 3] == 'b' && file[len - 4] == '.')
+		return (1);
+	return (0);
+}
+int	check_walls(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_wall(char **map)
+{
+	size_t	len;
+	int		i;
+	int		last_row_index;
+
+	if (!map || !map[0])
+		return (0);
+	len = ft_strlen(map[0]);
+	if (!check_walls(map[0]))
+		return (0);
+	i = 0;
+	while (map[i + 1])
+		i++;
+	last_row_index = i;
+	if (!check_walls(map[last_row_index]))
+		return (0);
+	i = 0;
+	while (map[i])
+	{
+		if (map[i][0] != '1' || map[i][len - 1] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	key_hook(int keycode, t_game *game)
@@ -53,7 +92,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 	t_elem	textures;
 
-	if (argc != 2)
+	if (argc != 2 || !file(argv[1]))
 	{
 		ft_printf("Wrong arguments\n");
 		return (1);
@@ -65,7 +104,7 @@ int	main(int argc, char **argv)
 	load_textures(&game, &textures);
 	game.textures = &textures;
 	render_map(&game, &textures);
-	mlx_hook(game.win, 17, 0, close_window, &game);
+	mlx_hook(game.win, 17, 0, free_game, &game);
 	mlx_key_hook(game.win, key_hook, &game);
 	mlx_loop(game.mlx);
 	mlx_destroy_window(game.mlx, game.win);

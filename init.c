@@ -6,7 +6,7 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 14:23:12 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 09:53:43 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/24 15:21:56 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,26 @@ void	valid_map(char **map)
 {
 	if (!is_rect(map))
 	{
-		ft_printf("Error: Map is not rectangular\n");
+		ft_printf("Error\nMap is not rectangular\n");
+		free_map(map);
+		exit(1);
+	}
+	if (!is_wall(map))
+	{
+		ft_printf("Error\nMap is not surrounded by walls\n");
+		free_map(map);
 		exit(1);
 	}
 	if (!elements(map))
 	{
-		ft_printf("Error: Missing or incorrect elements\n");
+		ft_printf("Error\nMissing or incorrect elements\n");
+		free_map(map);
+		exit(1);
+	}
+	if (!has_valid_path(map))
+	{
+		ft_printf("Error\nNo valid path exists\n");
+		free_map(map);
 		exit(1);
 	}
 	ft_printf("Valid map\n");

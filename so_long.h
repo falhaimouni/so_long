@@ -6,7 +6,7 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:21:05 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 10:17:43 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/24 15:54:21 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <fcntl.h>
+# include <stdbool.h>
 
 typedef struct s_elem
 {
@@ -50,6 +51,15 @@ typedef struct s_game
 	t_elem	*textures;
 }	t_game;
 
+typedef struct s_info
+{
+	bool	**visited;
+	int		rows;
+	int		cols;
+	int		start_x;
+	int		start_y;
+}	t_info;
+
 void	init_vars(t_game *game);
 int		count_lines(int fd);
 void	remove_newline(char *line);
@@ -72,6 +82,9 @@ void	render_palyer(t_game *game, t_elem *textures);
 void	free_img(t_game *game);
 void	free_window(t_game *game);
 void	free_map(char **map);
-void	free_game(t_game *game);
-
+int		check_walls(char *line);
+int		is_wall(char **map);
+int		free_game(t_game *game);
+void	dfs(char **map, int x, int y, bool **visited);
+int		has_valid_path(char **map);
 #endif

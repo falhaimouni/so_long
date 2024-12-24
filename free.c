@@ -6,7 +6,7 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:08:28 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 10:43:43 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/24 13:54:07 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	free_game(t_game *game)
+int	free_game(t_game *game)
 {
 	free_map(game->map);
 	free_img(game);
