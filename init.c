@@ -6,18 +6,16 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 14:23:12 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/22 14:58:57 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/24 09:53:43 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**read_map(char *file_path)
+char	**read_file_lines(char *file_path, int *lines_out)
 {
 	char	**map;
-	char	*line;
 	int		fd;
-	int		i;
 	int		lines;
 
 	fd = open(file_path, O_RDONLY);
@@ -28,24 +26,38 @@ char	**read_map(char *file_path)
 	}
 	lines = count_lines(fd);
 	close(fd);
+	map = malloc((lines + 1) * sizeof(char *));
+	if (!map)
+	{
+		perror("Error");
+		exit(1);
+	}
+	*lines_out = lines;
+	return (map);
+}
+
+char	**read_map(char *file_path)
+{
+	char	**map;
+	char	*line;
+	int		fd;
+	int		lines;
+	int		i;
+
+	map = read_file_lines(file_path, &lines);
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Error");
 		exit(1);
 	}
-	map = malloc((lines + 1) * sizeof(char *));
-	if (!map)
-	{
-		perror("Error");
-		close(fd);
-		exit(1);
-	}
 	i = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		remove_newline(line);
 		map[i] = line;
+		line = get_next_line(fd);
 		i++;
 	}
 	map[i] = NULL;
@@ -81,7 +93,8 @@ void	init(t_game *game, char **map)
 	while (map[game->height])
 		game->height++;
 	game->width = ft_strlen(map[0]);
-	game->win = mlx_new_window(game->mlx, game->width * 32, game->height * 32, "so_long");
+	game->win = mlx_new_window(game->mlx, game->width
+			* 64, game->height * 64, "so_long");
 	if (!game->win)
 	{
 		ft_printf("Error creating window\n");
@@ -96,7 +109,7 @@ void	load_textures(t_game *game, t_elem *tex)
 
 	tex->wall = mlx_xpm_file_to_image(game->mlx, "tex/wall.xpm", &wid, &h);
 	tex->floor = mlx_xpm_file_to_image(game->mlx, "tex/floor.xpm", &wid, &h);
-	tex->player = mlx_xpm_file_to_image(game->mlx, "tex/ozha.xpm", &wid, &h);
+	tex->player = mlx_xpm_file_to_image(game->mlx, "tex/cat.xpm", &wid, &h);
 	tex->collect = mlx_xpm_file_to_image(game->mlx, "tex/mouse.xpm", &wid, &h);
 	tex->exit = mlx_xpm_file_to_image(game->mlx, "tex/exit.xpm", &wid, &h);
 	if (!tex->wall || !tex->floor || !tex->player

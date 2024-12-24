@@ -1,7 +1,7 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
-SRCS = main.c move.c init.c
+SRCS = main.c move.c init.c free.c utils.c
 LIB = ft_printf/
 LIBA = libftprintf.a
 LIB_PATH = $(LIB)libft/
@@ -13,19 +13,19 @@ MLX_LIB = -L$(MLX_PATH) -lmlx -lXext -lX11
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	@make -C $(LIB)
-	@cp $(LIB)$(LIBA) .
-	@$(CC) $(CFLAGS) $(OFILES) $(LIBA) $(MLX_LIB) -o $(NAME)
+	make -C $(LIB)
+	cp $(LIB)$(LIBA) .
+	$(CC) $(CFLAGS) $(OFILES) $(LIBA) $(MLX_LIB) -o $(NAME)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OFILES)
-	@make -C $(LIB) clean
+	make -C $(LIB) clean
 
 fclean: clean
 	rm -f $(NAME) $(LIBA)
-	@make -C $(LIB) fclean
+	make -C $(LIB) fclean
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:21:39 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/18 09:25:17 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/24 09:35:28 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	subline(char **cur_line, char *buf)
 	free(*cur_line);
 	*cur_line = line;
 }
+
 static char	*join(char *buffer, char *buf, int fd)
 {
 	char	*line;
@@ -107,4 +108,3 @@ char	*get_next_line(int fd)
 	subline(&cur_line, buf);
 	return (cur_line);
 }
-
