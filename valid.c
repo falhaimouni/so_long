@@ -6,7 +6,7 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:20:50 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 15:53:49 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/29 15:20:35 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	find_start_position(char **map, t_info *info)
 	}
 }
 
-int	check_path_exists(char **map, bool **visited, t_info *info)
+bool	check_path_exists(char **map, bool **visited, t_info *info)
 {
 	int	i;
 	int	j;
@@ -74,21 +74,21 @@ int	check_path_exists(char **map, bool **visited, t_info *info)
 		j = 0;
 		while (j < info->cols)
 		{
-			if (map[i][j] == 'E' && visited[i][j])
-			{
-				return (1);
-			}
+			if (map[i][j] == 'E' && !visited[i][j])
+				return (false);
+			else if (map[i][j] == 'C' && !visited[i][j])
+				return (false);
 			j++;
 		}
 		i++;
 	}
-	return (0);
+	return (true);
 }
 
 int	has_valid_path(char **map)
 {
 	t_info	info;
-	int		path_exists;
+	bool		path_exists;
 	int		i;
 
 	if (map == NULL)
@@ -96,7 +96,7 @@ int	has_valid_path(char **map)
 	info.rows = 0;
 	while (map[info.rows] != NULL)
 		info.rows++;
-	info.cols = strlen(map[0]);
+	info.cols = ft_strlen(map[0]);
 	initialize_visited(&info.visited, info.rows, info.cols);
 	find_start_position(map, &info);
 	dfs(map, info.start_x, info.start_y, info.visited);

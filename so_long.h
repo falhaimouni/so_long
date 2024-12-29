@@ -6,7 +6,7 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:21:05 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 15:54:21 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/29 11:30:02 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "ft_printf/ft_printf.h"
-# include "mlx.h"
+# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>

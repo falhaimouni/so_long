@@ -6,7 +6,7 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:59:57 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 13:07:17 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/25 10:26:07 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	move_player(t_game *game, int dx, int dy)
 	if (game->map[new_y][new_x] == 'E' && game->collected == game->c)
 		free_game(game);
 	game->count++;
-	ft_printf("%d\n", game->count);
+	ft_printf("Number of movment : %d\n", game->count);
 	game->player_x = new_x;
 	game->player_y = new_y;
 }

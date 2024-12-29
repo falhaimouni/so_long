@@ -6,7 +6,7 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 14:23:12 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 15:21:56 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/29 10:35:28 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	valid_map(char **map)
 		free_map(map);
 		exit(1);
 	}
-	ft_printf("Valid map\n");
 }
 
 void	init(t_game *game, char **map)
@@ -121,11 +120,16 @@ void	load_textures(t_game *game, t_elem *tex)
 	int	wid;
 	int	h;
 
-	tex->wall = mlx_xpm_file_to_image(game->mlx, "tex/wall.xpm", &wid, &h);
-	tex->floor = mlx_xpm_file_to_image(game->mlx, "tex/floor.xpm", &wid, &h);
-	tex->player = mlx_xpm_file_to_image(game->mlx, "tex/cat.xpm", &wid, &h);
-	tex->collect = mlx_xpm_file_to_image(game->mlx, "tex/mouse.xpm", &wid, &h);
-	tex->exit = mlx_xpm_file_to_image(game->mlx, "tex/exit.xpm", &wid, &h);
+	tex->wall = mlx_xpm_file_to_image(game->mlx,
+			"textures/wall.xpm", &wid, &h);
+	tex->floor = mlx_xpm_file_to_image(game->mlx,
+			"textures/floor.xpm", &wid, &h);
+	tex->player = mlx_xpm_file_to_image(game->mlx,
+			"textures/cat.xpm", &wid, &h);
+	tex->collect = mlx_xpm_file_to_image(game->mlx,
+			"textures/mouse.xpm", &wid, &h);
+	tex->exit = mlx_xpm_file_to_image(game->mlx,
+			"textures/exit.xpm", &wid, &h);
 	if (!tex->wall || !tex->floor || !tex->player
 		|| !tex->collect || !tex->exit)
 	{

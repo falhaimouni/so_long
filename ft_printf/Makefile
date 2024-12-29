@@ -1,5 +1,5 @@
 CC = cc 
-CFLAGS = -Werror -Wextra -Wall -g
+CFLAGS = -Werror -Wextra -Wall 
 SRCS = ft_printf.c ft_len.c ft_conversion.c ft_putnum.c ft_pointerhex.c
 LIB = libft/
 LIBA = libft.a

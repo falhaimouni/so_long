@@ -6,7 +6,7 @@
 /*   By: falhaimo <falhaimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:20:16 by falhaimo          #+#    #+#             */
-/*   Updated: 2024/12/24 16:04:30 by falhaimo         ###   ########.fr       */
+/*   Updated: 2024/12/29 11:38:58 by falhaimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,7 @@ int	is_wall(char **map)
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == 65307)
-	{
-		free_map(game->map);
-		free_img(game);
-		mlx_destroy_window(game->mlx, game->win);
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-		exit(0);
-	}
+		free_game(game);
 	if (keycode == 65361 || keycode == 97)
 		move_player(game, -1, 0);
 	else if (keycode == 65362 || keycode == 119)
@@ -97,7 +90,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || !file(argv[1]))
 	{
-		ft_printf("Wrong arguments\n");
+		ft_printf("Error\n");
 		return (1);
 	}
 	map = read_map(argv[1]);
@@ -110,7 +103,5 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 17, 0, free_game, &game);
 	mlx_key_hook(game.win, key_hook, &game);
 	mlx_loop(game.mlx);
-	mlx_destroy_window(game.mlx, game.win);
-	mlx_destroy_display(game.mlx);
 	return (0);
 }
